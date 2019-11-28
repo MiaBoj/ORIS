@@ -16,7 +16,7 @@ include ('header.php');
                    
                 </div>
                 <div class="card-body">
-                <?php
+<?php
  
  if(logovan()){
 $result = "SELECT `korisnickoIme`,`ime`,`prezime`,`email` FROM `korisnik` WHERE korisnickoIme = '".$_SESSION['korisnickoIme']."'";
