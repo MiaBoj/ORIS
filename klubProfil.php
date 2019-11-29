@@ -5,7 +5,10 @@ include ('funkcije.php');
 
  $korisnik =logovan();
  $konekcija=konekcija();
-
+$result = "SELECT *, klubovi.id as prikazKlub FROM `korisnik`,`klubovi` where `korisnik`.`isKlub`=`klubovi`.`id` and korisnik.korisnickoIme like '".logovan()."'";
+ $prikaz = mysqli_query($konekcija,$result);
+ $row = mysqli_fetch_assoc($prikaz);
+ $idKLub = $row['id'];
 if(isset($_POST['naziv']))
 {
  
@@ -23,7 +26,7 @@ if(isset($_POST['naziv']))
  }else{ 
   include ('header.php');
  //upit za ubacivanje vrednosti u polja inputa iz baze, vrsi se preko selecta i prikazuje u input kako bi polja imala vrednosti definisane u bazi
-            $result = mysqli_query( $konekcija, "SELECT *, klubovi.id as prikazKlub FROM `korisnik`,`klubovi` where `korisnik`.`isKlub`=`klubovi`.`id` and korisnickoIme  = '".$_SESSION['korisnickoIme']."'" );//upit za prikazivanje podataka iz baze
+            $result = mysqli_query( $konekcija, "SELECT *, klubovi.id as prikazKlub FROM `korisnik`,`klubovi` where `korisnik`.`isKlub`=`klubovi`.`id` and  id = $idKLub" );//upit za prikazivanje podataka iz baze
             $row = mysqli_fetch_array( $result );
 
             
